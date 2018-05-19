@@ -169,10 +169,11 @@ def predictState(model, dataIn, verbose = True):
     return prediction
     
 """
-EDIT THIS CODE IN THE EVENT THAT YOU WANT TO ADD NEW MODELS
-contents = sio.loadmat("rat8_features.mat")
-features = contents["features"]
-labels = contents["labels"]
+#EDIT THIS CODE IN THE EVENT THAT YOU WANT TO ADD NEW MODELS
+contents = sio.loadmat("rat8.mat")
+data = contents["EEGandEMG"]
+labels = contents["Labels"]
+features = extractFeatures(data)
 
 mean_zero = make_rowmean_zero(features)
 norm_features = np.apply_along_axis(normalize, 1, mean_zero)

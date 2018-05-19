@@ -17,6 +17,12 @@ class RatClassifier():
         self.data = None
         self.features = None
 
+        #Change this to another value in (0,1)
+        #in order to only allow the certain networks to "vote"
+        #May increase performance slightly, but may also lead to
+        #All zero label vector in extreme cases
+        self.threshold = 0 
+
     def addModelFromFile(self, path, n=0):
         if n == 0:
             self.modelsN0.append(load_model(path))
@@ -64,7 +70,10 @@ class RatClassifier():
         for col in self.features.T:
             pred = np.array([0.0,0.0,0.0])
             for m in self.modelsN0:
-                pred = pred + predictState(m, col, verbose)
+                p = predictState(m, col, verbose)
+                if np.amax(p) < self.threshold:
+                    p = np.array([0.0,0.0,0.0])
+                pred = pred + p
             if preds is None:
                 preds = pred
             else:
@@ -83,7 +92,10 @@ class RatClassifier():
         for col in features_N5.T:
             pred = np.array([0.0,0.0,0.0])
             for m in self.modelsN5:
-                pred = pred + predictState(m, col, verbose)
+                p = predictState(m, col, verbose)
+                if np.amax(p) < self.threshold:
+                    p = np.array([0.0,0.0,0.0])
+                pred = pred + p
             preds = np.vstack((preds,pred))
         preds = np.vstack((preds,initial))
         self.resultN5 = preds
@@ -100,7 +112,10 @@ class RatClassifier():
         for col in features_N10.T:
             pred = np.array([0.0,0.0,0.0])
             for m in self.modelsN10:
-                pred = pred + predictState(m, col, verbose)
+                p = predictState(m, col, verbose)
+                if np.amax(p) < self.threshold:
+                    p = np.array([0.0,0.0,0.0])
+                pred = pred + p
             preds = np.vstack((preds,pred))
         preds = np.vstack((preds,initial))
         self.resultN10 = preds
