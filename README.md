@@ -20,11 +20,13 @@ python rat_classifier.py *data_to_classify* *path_to_save_labels*
 EX:
 python rat_classifier.py rat8.mat labeled8.mat
 ```
-data_to_classify must contain a 4000 x N array with named EEGandEEG on the form
+data_to_classify must contain a 4000 x N array named EEGandEEG on the form
 ```
-EEGandEMG = [EEG;
-             EMG]
+EEGandEMGColumn = [EEG;
+                   EMG]
 ```
+where EEG and EMG both are 2000 x 1 vectors.
+
 The labels will be saved in the path_to_save_labels in a 3 x N array named Labels
 The columns of the array will be one hot encoded like this
 ```
