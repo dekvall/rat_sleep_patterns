@@ -1,6 +1,7 @@
 # Rat classification
 A program that takes EEG and EMG data to label the sleep state of rats.
-REQUIRES python 3.6+
+REQUIRES python 3.6+.
+
 25 hours of data takes roughly 4 minutes to classify, depending on platform.
 
 ## Dependencies
