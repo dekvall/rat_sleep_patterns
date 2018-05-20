@@ -168,32 +168,32 @@ def predictState(model, dataIn, verbose = True):
         print(getStringPrediction(prediction))
     return prediction
     
-"""
-#EDIT THIS CODE IN THE EVENT THAT YOU WANT TO ADD NEW MODELS
-contents = sio.loadmat("rat8.mat")
-data = contents["EEGandEMG"]
-labels = contents["Labels"]
-features = extractFeatures(data)
+if __name__ == '__main__':
+    #EDIT THIS CODE IN THE EVENT THAT YOU WANT TO ADD NEW MODELS
+    contents = sio.loadmat("rat1.mat")
+    data = contents["EEGandEMG"]
+    labels = contents["Labels"]
+    features = extractFeatures(data)
 
-mean_zero = make_rowmean_zero(features)
-norm_features = np.apply_along_axis(normalize, 1, mean_zero)
+    mean_zero = make_rowmean_zero(features)
+    norm_features = np.apply_along_axis(normalize, 1, mean_zero)
 
-CONSECUTIVE = True
-LOAD = False
-N = 10
-if CONSECUTIVE:
-    norm_consecutive_features = makeNConsecutive(norm_features,N)
-    labels_consecutive = removeNFirstAndLastCol(labels,N)
-    
-    trainingX, trainingY, testX, testY = makeTrainingAndTestData(norm_consecutive_features, labels_consecutive)
-    if not LOAD:
+    CONSECUTIVE = False #Set to True if n != 0
+
+    #It is possible to create models with any N
+    #but rat_classifier.py currently only works with N = 5 and N = 10
+    N = 5 
+
+    if CONSECUTIVE:
+        norm_consecutive_features = makeNConsecutive(norm_features,N)
+        labels_consecutive = removeNFirstAndLastCol(labels,N)
+        
+        trainingX, trainingY, testX, testY = makeTrainingAndTestData(norm_consecutive_features, labels_consecutive)
         model = createAndSaveConsecutiveModel(trainingX, trainingY, testX, testY)
-else:
-    trainingX, trainingY, testX, testY = makeTrainingAndTestData(norm_features, labels)
-    if not LOAD:
+    else:
+        trainingX, trainingY, testX, testY = makeTrainingAndTestData(norm_features, labels)
         model = createAndSaveModel(trainingX, trainingY, testX, testY)
 
-model.save("mod5_10.h5")
-"""
+    model.save("mod1_0.h5") #Needs to be named "mod{rat_number}_{N}.h5 and then placed in the corrct folder to work
 
 
