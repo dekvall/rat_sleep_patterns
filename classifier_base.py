@@ -97,7 +97,7 @@ def extractFeatures(data):
 
 def makeTrainingAndTestData(data, labels):
     """Returns training data in the format (datalength x 8) and (3 x datalength)"""
-    trainingSamples = int(0.95*data.shape[1]); #This gives 95 % testdata
+    trainingSamples = int(0.95*data.shape[1]); #This gives 95 % trainingdata
     indices = np.random.permutation(data.T.shape[0])
     training_idx, test_idx = indices[:trainingSamples], indices[trainingSamples:]
     trainingX, testX = data.T[training_idx,:], data.T[test_idx,:]
