@@ -121,7 +121,7 @@ class RatClassifier():
         self.resultN10 = preds
 
 if __name__ == '__main__':
-    if len(sys.argv) == 1:
+    if len(sys.argv) != 3:
         print("Start the program like so:\n\
 python rat_classifier.py *data_to_classify* *file_to_save_labels*\n\
 EX: python rat_classifier.py rat8.mat labels8.mat")
