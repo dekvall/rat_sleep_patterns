@@ -1,8 +1,11 @@
 # Rat classification
 A program that takes EEG and EMG data to label the sleep state of rats.
-REQUIRES python 3.6+.
+REQUIRES `python 3.6+`.
 
 25 hours of data takes roughly 4 minutes to classify, depending on platform.
+
+## Paper
+Paper available [here](http://kth.diva-portal.org/smash/record.jsf?pid=diva2:1264829)
 
 ## Dependencies
 ```
@@ -20,14 +23,14 @@ python rat_classifier.py *data_to_classify* *path_to_save_labels*
 EX:
 python rat_classifier.py rat8.mat labeled8.mat
 ```
-data_to_classify must contain a 4000 x N array named EEGandEEG on the form
+data_to_classify must contain a `4000 x N` array named EEGandEEG on the form
 ```
 EEGandEMGColumn = [EEG;
                    EMG]
 ```
 where EEG and EMG both are 2000 x 1 vectors.
 
-The labels will be saved in the path_to_save_labels in a 3 x N array named Labels
+The labels will be saved in the path_to_save_labels in a `3 x N` array named Labels
 The columns of the array will be one hot encoded like this
 ```
 LabelColumn = [WAKE;
